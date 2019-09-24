@@ -1,7 +1,7 @@
 {
-  "name": "node-handlebars-boilerplate",
+  "name": "Project2-GettingDirty",
   "version": "1.0.0",
-  "description": "Project 2 Starter",
+  "description": "GettingDirty",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
