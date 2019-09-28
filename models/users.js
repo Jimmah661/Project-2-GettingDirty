@@ -54,6 +54,10 @@ module.exports = function(sequelize, DataTypes) {
         );
     });
 
+    User.associate = function(models) {
+        User.hasMany(models.Quotes, {});
+      };
+
     // End the model and export for use elsewhere
     return User;
 };
