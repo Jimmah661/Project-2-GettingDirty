@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "exampledb",
+    "username": "james",
+    "password": "Pancakes2019",
+    "database": "soiled_db",
     "host": "localhost",
     "dialect": "mysql"
   },
