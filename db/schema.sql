@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS soiled_db;
+CREATE DATABASE soiled_db;
