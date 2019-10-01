@@ -20,6 +20,10 @@ module.exports = function(sequelize, DataTypes) {
                 len: [6]
             }
         },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         // Password field
         password: {
             type: DataTypes.STRING,
