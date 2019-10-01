@@ -34,6 +34,41 @@ module.exports = function(app) {
       });
     }
   });
+  //----------- get all products from the soiled_db/products table -------
+
+  app.get("/api/products", function(req, res) {
+    db.Products.findAll({}).then(function(dbProducts) {
+      res.json(dbProducts);
+    });
+  });
+
+  //------------get a product from the soiled_db/products table ----
+
+  app.get("/api/products/:id", function(req, res) {
+    db.Products.findOne({ where: { id: req.params.id } }).then(function(
+      dbProducts
+    ) {
+      res.json(dbProducts);
+    });
+  });
+
+  //-----------get a completed quote from the soiled_db/quotes table
+  app.get("/api/quotes/:id", function(req, res) {
+    db.Quotes.findOne({ where: { id: req.params.id } }).then(function(
+      dbQuotes
+    ) {
+      res.json(dbQuotes);
+    });
+  });
+
+  // -------  create a quote for a product ---------------------------
+
+  app.post("/api/quotes", function(req, res) {
+    db.Quotes.create(req.body).then(function(dbQuotes) {
+      res.json(dbQuotes);
+    });
+  });
+
   // -------------------------- BELOW THIS LINE ARE EXAMPLES --------------------------
   // // Get all examples
   // app.get("/api/examples", function(req, res) {
