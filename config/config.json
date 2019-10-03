@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "james",
-    "password": "Pancakes2019",
+    "username": "root",
+    "password": "srds1221",
     "database": "soiled_db",
     "host": "localhost",
     "dialect": "mysql"
