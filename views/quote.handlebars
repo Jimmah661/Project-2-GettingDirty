@@ -1,99 +1,120 @@
-<!-- Grid row -->
-<div class="container" id="products">
-  <div class="row">
-
-    <!-- Grid column -->
-    <div class="col-lg-4 col-md-12">
-
-      <!--Card-->
-      <div class="card">
-
-        <!--Card image-->
-        <div class="view">
-          <img src="/public/assets/img/red-soil.jpg" class="card-img-top" alt="Red Soil">
-          <a href="#">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-
-        <!--Card content-->
-        <div class="card-body">
-          <!--Title-->
-          <h4 class="card-title">Red Soil</h4>
-          <!--Text-->
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-            card's content.</p>
-          <a href="#" class="btn btn-primary">Button</a>
-        </div>
-
-      </div>
-      <!--/.Card-->
-
-    </div>
-    <!-- Grid column -->
-
-    <!-- Grid column -->
-    <div class="col-lg-4 col-md-12">
-
-      <!--Card-->
-      <div class="card">
-
-        <!--Card image-->
-        <div class="view">
-          <img src="/public/assets/img/pavement-stones.jpg" class="card-img-top" alt="Pavement Stones">
-          <a href="#">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-
-        <!--Card content-->
-        <div class="card-body">
-          <!--Title-->
-          <h4 class="card-title">Pavement Stones</h4>
-          <!--Text-->
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-            card's content.</p>
-          <a href="#" class="btn btn-primary">Button</a>
-        </div>
-
-      </div>
-      <!--/.Card-->
-
-    </div>
-    <!-- Grid column -->
-
-    <!-- Grid column -->
-    <div class="col-lg-4 col-md-12">
-
-      <!--Card-->
-      <div class="card">
-
-        <!--Card image-->
-        <div class="view">
-          <img src="/public/assets/img/green-grass.jpg" class="card-img-top" alt="Green Grass">
-          <a href="#">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-
-        <!--Card content-->
-        <div class="card-body">
-          <!--Title-->
-          <h4 class="card-title">Green Grass</h4>
-          <!--Text-->
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-            card's content.</p>
-          <a href="#" class="btn btn-primary">Button</a>
-        </div>
-
-      </div>
-      <!--/.Card-->
-
-    </div>
-    <!-- Grid column -->
-
-
-
-  </div>
+<div class="body-container bgimg">
   <!-- Grid row -->
+  <div class="container" id="products">
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-lg-4 col-md-12">
+
+        <!--Card-->
+        <div class="card">
+
+          <!--Card image-->
+          <div class="image red-soil z-depth-1">
+            <img src="/public/assets/img/red-soil.jpg" class="card-img-top" alt="Red Soil">
+            <a href="#">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+
+          <!--Card content-->
+          <div class="card-body">
+            <!--Title-->
+            <h4 class="card-title">Red Soil</h4>
+            <!--Text-->
+            <p class="card-text">Red desert sand for that desert look.</p>
+            <div class="price">$15.00/m&sup2;</div>
+            <select id="prod-1" class="browser-default custom-select" data-qty="1">
+              <option selected>Select quantity (m&sup2;)</option>
+              <option value="1">5</option>
+              <option value="2">10</option>
+              <option value="3">15</option>
+            </select>
+            <a href="#" class="btn btn-primary product-quote" data-product="1">Get Quote!</a>
+
+          </div>
+
+        </div>
+        <!--/.Card-->
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-lg-4 col-md-12">
+
+        <!--Card-->
+        <div class="card">
+
+          <!--Card image-->
+          <div class="image pavement-stones z-depth-1">
+            <img src="/public/assets/img/pavement-stones.jpg" class="card-img-top" alt="Pavement Stones">
+            <a href="#">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+
+          <!--Card content-->
+          <div class="card-body">
+            <!--Title-->
+            <h4 class="card-title">Pavement Stones</h4>
+            <!--Text-->
+            <p class="card-text">Natural stone tile, 50 x 50 x 25mm.</p>
+            <div id="PS552-price" class="price">$5.00/m&sup2;</div>
+            <select id="prod-2" class="browser-default custom-select" data-qty="2">
+              <option selected>Select quantity (m&sup2;)</option>
+              <option value="1">5</option>
+              <option value="2">10</option>
+              <option value="3">15</option>
+            </select>
+            <a href="#" class="btn btn-primary product-quote" data-product="2">Get Quote!</a>
+          </div>
+
+        </div>
+        <!--/.Card-->
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-lg-4 col-md-12">
+
+        <!--Card-->
+        <div class="card">
+
+          <!--Card image-->
+          <div class="image green-grass z-depth-1">
+            <img src="/public/assets/img/green-grass.jpg" class="card-img-top" alt="Green Grass">
+            <a href="#">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+
+          <!--Card content-->
+          <div class="card-body">
+            <!--Title-->
+            <h4 class="card-title">Green Grass</h4>
+            <!--Text-->
+            <p class="card-text">Soft leaf turf.</p>
+            <div id="GGS-price" class="price">$15.00/m&sup2;</div>
+            <select id="prod-3" class="browser-default custom-select" data-qty="3">
+              <option selected>Select quantity (m&sup2;)</option>
+              <option value="1">5</option>
+              <option value="2">10</option>
+              <option value="3">15</option>
+            </select>
+            <a href="#" class="btn btn-primary product-quote" data-product="3">Get Quote!</a>
+          </div>
+
+        </div>
+        <!--/.Card-->
+
+      </div>
+      <!-- Grid column -->
+
+
+
+    </div>
+    <!-- Grid row -->
+  </div>
 </div>
