@@ -1,10 +1,11 @@
-var modal = document.getElementById('id01');
+var modal = document.getElementById("id01");
 
-window.onlick = function (event) {
-  if (event.target == modal) {
+window.onlick = function(event) {
+  if (event.target === modal) {
     modal.style.display = "none";
   }
 };
+
 
 $(".pdf").on("click", function (event) {
        
@@ -22,3 +23,4 @@ $.ajax(URL, {
       }
   );
 });
+
