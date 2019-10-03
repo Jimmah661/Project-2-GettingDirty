@@ -1,27 +1,29 @@
 $(document).ready(function() {
     // need to UPDATE the  button  ID from the handlebars page
-    $("#TO_BE_CONFIRMED").on("click", function(event) {
+    $(".product-quote").on("click", function(event) {
       event.preventDefault();
-      var quoteData = {
-        quantity: $("#TO_BE_CONFIRMED")
-          .val()
-          .trim()
-      };
+      var prodNumber = $(this).attr("data-product");
+      var qtyNumber = $(this).attr("#prod-1");
   
-      console.log(quoteData);
-  
-      if (!quoteData.quantity) {
+      // need to include a data attribute for the UserId (email)
+      
+      if (!qtyNumber) {
         return;
       }
-  
-      newQuote(quoteData.quantity);
-      $("#TO_BE_CONFIRMED").val("");
+      
+      var quoteData = {
+        quantity: qtyNumber,
+        ProductId: prodNumber,
+        UserId: UserId
+      }
+
+      newQuote(quoteData);
+      $("prod-1").val("");
+      $("data-product").val("");
     });
   
     function newQuote(quantity) {
-      $.post("/api/quotes", {
-        quantity: quantity
-      })
+      $.post("/api/quotes", quoteData)
         .then(function(data) {
           window.location.replace(data);
         })
