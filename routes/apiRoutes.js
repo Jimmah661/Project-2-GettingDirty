@@ -66,7 +66,11 @@ module.exports = function(app) {
   // -------  create a quote for a product ---------------------------
 
   app.post("/api/quotes", function(req, res) {
-    db.Quotes.create(req.body).then(function(dbQuotes) {
+    db.Quote.create({
+      quantity: req.body.quantity,
+      ProductId: req.body.ProductId,
+      UserId: req.body.UserId
+    }).then(function(dbQuotes) {
       res.json(dbQuotes);
     });
   });
