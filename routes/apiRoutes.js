@@ -4,12 +4,14 @@ var passport = require("../config/passport");
 module.exports = function(app) {
   // -------------------------- BELOW THIS LINE IS JAMES'S LOGIN ROUTES --------------------------
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    res.json("/members");
+    console.log("Testing");
+    res.json("/quotes");
   });
   app.post("/api/signup", function(req, res) {
     console.log(req.body);
     db.User.create({
       email: req.body.email,
+      name: req.body.name,
       password: req.body.password
     })
       .then(function() {
