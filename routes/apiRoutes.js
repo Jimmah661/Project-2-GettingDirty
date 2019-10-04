@@ -3,32 +3,32 @@ var passport = require("../config/passport");
 var PDFDocument = require("pdfkit");
 var moment = require("moment");
 var fs = require("fs");
-module.exports = function(app) {
+module.exports = function (app) {
   // -------------------------- BELOW THIS LINE IS JAMES'S LOGIN ROUTES --------------------------
-  app.post("/api/login", passport.authenticate("local"), function(req, res) {
+  app.post("/api/login", passport.authenticate("local"), function (req, res) {
     console.log("Testing");
     res.json("/quotes");
   });
-  app.post("/api/signup", function(req, res) {
+  app.post("/api/signup", function (req, res) {
     console.log(req.body);
     db.User.create({
-      email: req.body.email,
-      name: req.body.name,
-      password: req.body.password
-    })
-      .then(function() {
+        email: req.body.email,
+        name: req.body.name,
+        password: req.body.password
+      })
+      .then(function () {
         res.redirect(307, "/api/login");
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log(err);
         res.json(err);
       });
   });
-  app.get("/logout", function(req, res) {
+  app.get("/logout", function (req, res) {
     req.logout();
     res.redirect("/");
   });
-  app.get("/api/user_data", function(req, res) {
+  app.get("/api/user_data", function (req, res) {
     if (!req.user) {
       res.json({});
     } else {
@@ -40,16 +40,20 @@ module.exports = function(app) {
   });
   //----------- get all products from the soiled_db/products table -------
 
-  app.get("/api/products", function(req, res) {
-    db.Products.findAll({}).then(function(dbProducts) {
+  app.get("/api/products", function (req, res) {
+    db.Products.findAll({}).then(function (dbProducts) {
       res.json(dbProducts);
     });
   });
 
   //------------get a product from the soiled_db/products table ----
 
-  app.get("/api/products/:id", function(req, res) {
-    db.Products.findOne({ where: { id: req.params.id } }).then(function(
+  app.get("/api/products/:id", function (req, res) {
+    db.Products.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (
       dbProducts
     ) {
       res.json(dbProducts);
@@ -57,8 +61,12 @@ module.exports = function(app) {
   });
 
   //-----------get a completed quote from the soiled_db/quotes table
-  app.get("/api/quotes/:id", function(req, res) {
-    db.Quotes.findOne({ where: { id: req.params.id } }).then(function(
+  app.get("/api/quotes/:id", function (req, res) {
+    db.Quotes.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (
       dbQuotes
     ) {
       res.json(dbQuotes);
@@ -67,12 +75,12 @@ module.exports = function(app) {
 
   // -------  create a quote for a product ---------------------------
 
-  app.post("/api/quotes", function(req, res) {
+  app.post("/api/quotes", function (req, res) {
     db.Quote.create({
       quantity: req.body.quantity,
       ProductId: req.body.ProductId,
       UserId: req.body.UserId
-    }).then(function(dbQuotes) {
+    }).then(function (dbQuotes) {
       res.json(dbQuotes);
     });
   });
@@ -101,33 +109,31 @@ module.exports = function(app) {
 
 
   //################CODE FOR PDF GENERATION###################
-  app.get("/pdf/:id", function(req, res) {
+  app.get("/pdf/:id", function (req, res) {
     var id = req.params.id;
-    
-    
+
+
     console.log(id);
     // res.send("SUCCESS");
     db.Quotes.findAll({
       where: {
         quoteID: id
       },
-       include: [db.User,db.Products],
-      
-    }).then(function(fetch) {
-      console.log(fetch);
+      include: [db.User, db.Products],
+
+    }).then(function (fetch) {
       var date = moment().format("DD/MM/YYYY");
       // console.log("NAME IS",fetch[0].User)
-    var name=fetch[0].User.name;
-      console.log(name);
-      console.log("MY DaTe IS:" + date);
+      var name = fetch[0].User.name;
+      var email = fetch[0].User.email;
       //******START OF PDF GENERATION *******//
       var doc = new PDFDocument({
         margin: 50
       });
       doc.pipe(fs.createWriteStream("output.pdf"));
       generateHeader(doc);
-       generateCustomerInformation(doc,id, name, date);
-       generateInvoiceTable(doc,fetch)
+      generateCustomerInformation(doc, id, name, date, email);
+      generateInvoiceTable(doc, fetch)
       generateFooter(doc);
       doc.end();
 
@@ -157,15 +163,14 @@ module.exports = function(app) {
           .text(
             "This quote is valid for 30 days. Thank you for your business.",
             50,
-            730,
-            {
+            730, {
               align: "center",
               width: 500
             }
           );
       }
 
-      function generateCustomerInformation(doc,id, name, date) {
+      function generateCustomerInformation(doc, id, name, date) {
         doc
           .fillColor("#444444")
           .fontSize(20)
@@ -183,27 +188,20 @@ module.exports = function(app) {
           .font("Helvetica")
           .text("Quote Date:", 50, customerInformationTop + 15)
           .text(date, 150, customerInformationTop + 15)
-          .text("Amount:", 50, customerInformationTop + 30)
-          .text("PLACE AMOUNT", 150, customerInformationTop + 30)
-
           .font("Helvetica")
           .text("Name:", 300, customerInformationTop)
           .text(name, 350, customerInformationTop)
-          // .font("Helvetica")
-          // .text("PLACE CUSTOMER ADDRESS", 300, customerInformationTop + 15)
-          // .text(
-          //   "CITY" + ", " + "VIC" + ", " + "AUSTRALIA",
-          //   300,
-          //   customerInformationTop + 30
-          // )
+          .text("Email:", 300, customerInformationTop + 15)
+          .text(email, 350, customerInformationTop + 15)
           .moveDown();
 
         generateHr(doc, 252);
       }
-      function generateInvoiceTable(doc,fetch) {
+
+      function generateInvoiceTable(doc, fetch) {
         let i;
         const invoiceTableTop = 330;
-      
+
         doc.font("Helvetica-Bold");
         generateTableRow(
           doc,
@@ -216,25 +214,25 @@ module.exports = function(app) {
         );
         generateHr(doc, invoiceTableTop + 20);
         doc.font("Helvetica");
-        var Total=0;
+        var Total = 0;
         for (i = 0; i < fetch.length; i++) {
-         var itemTotal =fetch[i].quantity*fetch[i].Product.price;
-         
-         Total+=itemTotal
+          var itemTotal = fetch[i].quantity * fetch[i].Product.price;
+
+          Total += itemTotal
           const position = invoiceTableTop + (i + 1) * 30;
           generateTableRow(
             doc,
             position,
             fetch[i].Product.id,
             fetch[i].Product.name,
-            fetch[i].Product.price,
+            formatCurrency(fetch[i].Product.price),
             fetch[i].quantity,
-            itemTotal
+            formatCurrency(itemTotal)
           );
-      
+
           generateHr(doc, position + 20);
         }
-      
+
         const subtotalPosition = invoiceTableTop + (i + 1) * 30;
         generateTableRow(
           doc,
@@ -243,32 +241,8 @@ module.exports = function(app) {
           "",
           "Subtotal",
           "",
-          Total
+          formatCurrency(Total)
         );
-      
-        const paidToDatePosition = subtotalPosition + 20;
-        generateTableRow(
-          doc,
-          paidToDatePosition,
-          "",
-          "",
-          "Paid To Date",
-          "",
-          "PAID AMOUNT"
-        );
-      
-        const duePosition = paidToDatePosition + 25;
-        doc.font("Helvetica-Bold");
-        generateTableRow(
-          doc,
-          duePosition,
-          "",
-          "",
-          "Balance Due",
-          "",
-         "AMOUNTDUE"
-        );
-        doc.font("Helvetica");
       }
 
       function generateTableRow(
@@ -284,11 +258,23 @@ module.exports = function(app) {
           .fontSize(10)
           .text(item, 50, y)
           .text(description, 150, y)
-          .text(unitCost, 280, y, { width: 90, align: "right" })
-          .text(quantity, 370, y, { width: 90, align: "right" })
-          .text(lineTotal, 0, y, { align: "right" });
+          .text(unitCost, 280, y, {
+            width: 90,
+            align: "right"
+          })
+          .text(quantity, 370, y, {
+            width: 90,
+            align: "right"
+          })
+          .text(lineTotal, 0, y, {
+            align: "right"
+          });
       }
-      
+
+      function formatCurrency(currency) {
+        return "$" + currency;
+      }
+
       function generateHr(doc, y) {
         doc
           .strokeColor("#aaaaaa")
