@@ -75,23 +75,3 @@ $(document).ready(function() {
 });
 
 
-$(".pdf").on("click", function (event) {
-       
-  var id= "Q111"
-
-var URL='/pdf/'+id;
-$.ajax(URL, {
-      type: "GET",
-  })
-  //We get the reponse of the answers send reload the page
-  .then(
-      function (response) {
-           console.log(response);
-           var a = document.createElement('a');
-a.href= "data:application/octet-stream;base64,"+response;
-a.target = '_blank';
-a.download = 'filename.pdf';
-a.click();
-      }
-  );
-});

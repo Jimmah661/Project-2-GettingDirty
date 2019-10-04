@@ -132,7 +132,7 @@ module.exports = function (app) {
       });
       //doc.pipe(fs.createWriteStream("output.pdf"));
       var filename = encodeURIComponent(id) + '.pdf';
-      res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"');
+      res.setHeader('Content-disposition', 'inline; filename="' + filename + '"');
       res.setHeader('Content-type', 'application/pdf');
       generateHeader(doc);
       generateCustomerInformation(doc, id, name, date, email);
