@@ -87,7 +87,11 @@ $.ajax(URL, {
   .then(
       function (response) {
            console.log(response);
-
+           var a = document.createElement('a');
+a.href= "data:application/octet-stream;base64,"+response;
+a.target = '_blank';
+a.download = 'filename.pdf';
+a.click();
       }
   );
 });

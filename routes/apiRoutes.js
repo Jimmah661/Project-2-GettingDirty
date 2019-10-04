@@ -130,11 +130,15 @@ module.exports = function (app) {
       var doc = new PDFDocument({
         margin: 50
       });
-      doc.pipe(fs.createWriteStream("output.pdf"));
+      //doc.pipe(fs.createWriteStream("output.pdf"));
+      var filename = encodeURIComponent(id) + '.pdf';
+      res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"');
+      res.setHeader('Content-type', 'application/pdf');
       generateHeader(doc);
       generateCustomerInformation(doc, id, name, date, email);
       generateInvoiceTable(doc, fetch)
       generateFooter(doc);
+      doc.pipe(res);
       doc.end();
 
       //******END OF PDF GENERATION *******//
