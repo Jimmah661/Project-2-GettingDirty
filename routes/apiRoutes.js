@@ -7,7 +7,7 @@ module.exports = function (app) {
   // -------------------------- BELOW THIS LINE IS JAMES'S LOGIN ROUTES --------------------------
   app.post("/api/login", passport.authenticate("local"), function (req, res) {
     console.log("Testing");
-    res.json("/quotes");
+    res.json("/productPage");
   });
   app.post("/api/signup", function (req, res) {
     console.log(req.body);
@@ -200,7 +200,7 @@ module.exports = function (app) {
 
         generateHr(doc, 185);
 
-        const customerInformationTop = 200;
+        var customerInformationTop = 200;
 
         doc
           .fontSize(10)
@@ -219,11 +219,9 @@ module.exports = function (app) {
 
         generateHr(doc, 252);
       }
-
       function generateInvoiceTable(doc, fetch) {
-        let i;
-        const invoiceTableTop = 330;
-
+        var i;
+        var invoiceTableTop = 330;
         doc.font("Helvetica-Bold");
         generateTableRow(
           doc,
@@ -239,9 +237,8 @@ module.exports = function (app) {
         var Total = 0;
         for (i = 0; i < fetch.length; i++) {
           var itemTotal = fetch[i].quantity * fetch[i].Product.price;
-
-          Total += itemTotal
-          const position = invoiceTableTop + (i + 1) * 30;
+          Total += itemTotal;
+          var position = invoiceTableTop + (i + 1) * 30;
           generateTableRow(
             doc,
             position,
@@ -296,7 +293,6 @@ module.exports = function (app) {
       function formatCurrency(currency) {
         return "$" + currency;
       }
-
       function generateHr(doc, y) {
         doc
           .strokeColor("#aaaaaa")
