@@ -3,8 +3,11 @@ $(document).ready(function() {
     $(".product-quote").on("click", function(event) {
       event.preventDefault();
       var prodNumber = $(this).attr("data-product");
-      var qtyNumber = $(this).attr("#prod-1");
-  
+      var qtyNumber1 = $("#prod-1").val();
+      var qtyNumber2 = $("prod-2").val();
+      var qtyNumber3 = $("prod-3").val();
+      var prodNumber = $(this).attr("data-product");
+  console.log(qtyNumber3);
       // need to include a data attribute for the UserId (email)
       
       if (!qtyNumber) {
@@ -33,4 +36,4 @@ $(document).ready(function() {
       alert(err.responseJSON);
       $("#alert").fadeIn(500);
     }
-}
+});
