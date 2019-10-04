@@ -1,4 +1,5 @@
 var db = require("../models");
+var isAuthenticated = require("../config/middleware/isAuthenticated.js");
 
 module.exports = function(app) {
   // Load index page
@@ -7,7 +8,7 @@ module.exports = function(app) {
   });
 
   // Load example page and pass in an example by id
-  app.get("/productPage", function(req, res) {
+  app.get("/productPage", isAuthenticated, function(req, res) {
     res.render("quote");
   });
 
